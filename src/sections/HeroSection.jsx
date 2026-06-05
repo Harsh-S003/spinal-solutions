@@ -18,13 +18,7 @@ const HeroSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 md:py-0">
         <div className="max-w-3xl">
           
-          {/* Small Top Badge */}
-          <div className="inline-flex items-center space-x-2 bg-slate-800/60 border border-slate-700/50 rounded-full px-3 py-1.5 mb-6 backdrop-blur-sm">
-            <span className="w-2 h-2 rounded-full bg-[#71a82b]" />
-            <span className="text-[11px] font-bold uppercase tracking-wider text-gray-200">
-              Precision Redefined
-            </span>
-          </div>
+          
 
           {/* Main Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
