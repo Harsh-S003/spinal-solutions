@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 // Importing the icons from lucide-react
 import { MapPin, Phone, Mail, Printer } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#18191b] text-[#9ca3af] font-sans pt-12 pb-8 border-b-4 border-[#635bff]">
+    // <footer className="w-full bg-[#18191b] text-[#9ca3af] font-sans pt-12 pb-8 border-b-4 border-[#635bff]">
+    <footer className="w-full bg-[#18191b] text-[#9ca3af] font-sans pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top/Main Row */}
@@ -53,22 +55,25 @@ const Footer = () => {
 
           {/* Right Column: Navigation Links */}
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-1 md:pt-0">
-            {['Privacy Policy', 'Terms of Service', 'Shipping Info', 'Quality Assurance'].map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
-                className="text-[13px] font-medium text-gray-300 hover:text-white transition-colors duration-200"
-              >
-                {link}
-              </a>
-            ))}
+            <Link
+              to="/privacy-policy"
+              className="text-[13px] font-medium text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-of-service"
+              className="text-[13px] font-medium text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              Terms of Service
+            </Link>
           </div>
 
         </div>
 
         {/* Bottom Row: Copyright */}
         <div className="pt-4 text-[13px] text-[#71a82b] font-medium">
-          © 2024 Spinal Solutions. Precision Orthotic Engineering.
+          © 2026 Spinal Solutions. Precision Orthotic Engineering.
         </div>
 
       </div>

@@ -17,18 +17,46 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // const navLinks = ['Home', 'Products', 'Prosthetics', 'Order Forms', 'Contact', 'Customers'];
+  // const navLinks = [
+  //   { label: "Home", path: "/" },
+  //   { label: "Products", path: "/products" },
+  //   { label: "Prosthetics", path: "/prosthetics" },
+  //   { label: "Order Forms", path: "/order-forms" },
+  //   { label: "Contact", path: "/contact" },
+  // ];
   const navLinks = [
     { label: "Home", path: "/" },
-    { label: "Products", path: "/products" },
+    {
+      label: "Products",
+      subLinks: [
+        { label: "Carbon Fiber", path: "/carbon-fiber" },
+        { label: "Spinal Products", path: "/products/spinal" },
+        { label: "3D Printed Products", path: "/products/3d-printed" },
+        { label: "Distributed Products", path: "/products/distributed" },
+        { label: "Lower Extremity", path: "/products/lower-extremity" },
+        { label: "Insoles", path: "/products/insoles" },
+      ],
+    },
     { label: "Prosthetics", path: "/prosthetics" },
     { label: "Order Forms", path: "/order-forms" },
     { label: "Contact", path: "/contact" },
+    {
+      label: "Customers",
+      subLinks: [
+        { label: "Submit Order Form", path: "/customers/submit-order-form" },
+        { label: "O&P Scanning App", path: "/customers/o-p-scanning-app" },
+      ],
+    },
   ];
 
-  return (
+    // <nav
+    //   className={`w-full sticky top-0 z-50 border-t-4 border-[#635bff] font-sans transition-all duration-300 ${
+    //     scrolled ? "bg-[#f4f4f4]/80 backdrop-blur-md shadow-sm" : "bg-[#f4f4f4]"
+    //   }`}
+    // >
+    return (
     <nav
-      className={`w-full sticky top-0 z-50 border-t-4 border-[#635bff] font-sans transition-all duration-300 ${
+      className={`w-full sticky top-0 z-50 font-sans transition-all duration-300 ${
         scrolled ? "bg-[#f4f4f4]/80 backdrop-blur-md shadow-sm" : "bg-[#f4f4f4]"
       }`}
     >
@@ -46,7 +74,7 @@ const Navbar = () => {
             </div>
 
             {/* Main Nav Links (Hidden on mobile, adjust breakpoint as needed) */}
-            <div className="hidden md:flex items-center space-x-6">
+            {/* <div className="hidden md:flex items-center space-x-6">
               {navLinks.map((link) => {
                 const isActive = location.pathname === link.path;
                 return (
@@ -60,11 +88,66 @@ const Navbar = () => {
                     }`}
                   >
                     {link.label}
-                    {/* Underline for the active tab */}
+                 
                     {isActive && (
                       <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#008cc1] rounded-full" />
                     )}
                   </button>
+                );
+              })}
+            </div> */}
+            {/* Main Nav Links with Hover Dropdown */}
+            <div className="hidden md:flex items-center space-x-6 h-20">
+              {navLinks.map((link) => {
+                const isActive =
+                  (link.path && location.pathname === link.path) ||
+                  (link.subLinks && link.subLinks.some((sub) => location.pathname.startsWith(sub.path)));
+                const hasDropdown = !!link.subLinks;
+
+                return (
+                  <div
+                    key={link.label}
+                    className={`relative flex items-center h-full ${hasDropdown ? "group" : ""}`}
+                  >
+                    <button
+                      type="button"
+                      onClick={link.path ? () => navigate(link.path) : undefined}
+                      className={`relative py-2 text-[15px] font-medium transition-colors duration-200 cursor-pointer ${
+                        isActive
+                          ? "text-[#008cc1] font-semibold"
+                          : "text-[#4a4a4a] hover:text-[#008cc1]"
+                      }`}
+                      aria-haspopup={hasDropdown ? "menu" : undefined}
+                      aria-expanded={hasDropdown ? isActive : undefined}
+                    >
+                      {link.label}
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-[3px] bg-[#008cc1] rounded-full z-20" />
+                      )}
+                    </button>
+
+                    {/* Floating Dropdown Panel */}
+                    {hasDropdown && (
+                      <div className="absolute top-full left-0 w-64 bg-white shadow-xl border border-slate-100 rounded-b-md opacity-0 pointer-events-none translate-y-2 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 transition-all duration-200 z-50 py-3">
+                        {link.subLinks.map((subItem) => {
+                          const isSubActive = location.pathname === subItem.path;
+                          return (
+                            <button
+                              key={subItem.label}
+                              onClick={() => navigate(subItem.path)}
+                              className={`w-full text-left px-6 py-2.5 text-[13px] font-bold tracking-wider block transition-colors duration-150 cursor-pointer ${
+                                isSubActive
+                                  ? "text-[#008cc1] bg-slate-50"
+                                  : "text-gray-400 hover:text-[#008cc1] hover:bg-slate-50/80"
+                              }`}
+                            >
+                              {subItem.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -72,12 +155,6 @@ const Navbar = () => {
 
           {/* Right Side: Secondary Contact & Action Button */}
           <div className="hidden md:flex items-center space-x-6">
-            <a
-              href="#contact"
-              className="text-[#008cc1] font-medium text-[15px] hover:underline cursor-pointer"
-            >
-              Contact
-            </a>
             <button className="bg-[#00a3e0] cursor-pointer text-white font-bold py-2.5 px-6 rounded transition-all duration-200">
               Order Now
             </button>
