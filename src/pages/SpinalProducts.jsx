@@ -1,5 +1,6 @@
 import React from 'react'
 import ReusableHero from '../components/ReusableHero';
+import ProductCatalog from '../sections/ProductCatalog';
 const SpinalProducts = () => {
   return (
     <div>
@@ -13,6 +14,7 @@ const SpinalProducts = () => {
         secondaryBtnText="Contact Sales"
         secondaryBtnHref="/contact"
       />
+      <ProductCatalog />
     </div>
   )
 }

@@ -15,6 +15,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CarbonFiber from "./pages/CarbonFiber";
 import SpinalProducts from "./pages/SpinalProducts";
+import PrintedProducts from "./pages/PrintedProducts";
+import DistributedProducts from "./pages/DistributedProducts";
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -46,6 +48,8 @@ const App = () => {
           <Route path="/customers/o-p-scanning-app" element={<ScanningApp />} />
           <Route path="/carbon-fiber" element={<CarbonFiber />} />
           <Route path="/products/spinal" element={<SpinalProducts />} />
+          <Route path="/products/3d-printed" element={<PrintedProducts />} />
+          <Route path="/products/distributed" element={<DistributedProducts />} />  
         </Route>
       </Routes>
     </BrowserRouter>
